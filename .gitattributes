@@ -1,0 +1,27 @@
+# ----------------------------
+# GitHub Linguist Einstellungen für ecoMaps
+# ----------------------------
+
+# JavaScript (Frontend)
+*.js linguist-detectable=true
+*.js linguist-language=JavaScript
+
+# CSS (Frontend-Styles)
+*.css linguist-detectable=true
+*.css linguist-language=CSS
+
+# HTML (Frontend-Views)
+*.html linguist-detectable=true
+*.html linguist-language=HTML
+
+# Python (Backend – FastAPI, SUMO-Anbindung)
+*.py linguist-detectable=true
+*.py linguist-language=Python
+
+# Docker & Konfigurationsdateien
+Dockerfile linguist-detectable=true
+*.yml linguist-detectable=true
+*.yaml linguist-detectable=true
+
+# Verhindert falsche Erkennung bei Doku
+*.md linguist-documentation
