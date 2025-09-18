@@ -29,19 +29,35 @@ ecoMaps ist modular aufgebaut und trennt **Frontend** und **Backend** klar vonei
 Die Kommunikation erfolgt über eine REST-API mit einheitlichem **Response-Kontrakt** (distance, time, co₂, steps).
 
 ### 🔹 Frontend
-- **Technologien:** HTML, CSS, JavaScript  
-- **Frameworks:** Leaflet 1.9.4 (OpenStreetMap-Basiskarten, Overlays für Radwege und ÖPNV)  
-- **Struktur:** MapManager, UIManager, FormManager, RouteController  
-- **Besonderheiten:** Debounce-Suche, responsives UI, flexible Konfiguration über `config.js`  
+- **Technologien:** HTML, CSS, JavaScript (statisch ausgeliefert via Apache oder einfachem Webserver)  
+- **Karten-Framework:** Leaflet 1.9.4 mit OSM-Standardtiles und optionalen Overlays (Fahrradwege, ÖPNV)  
+- **Funktionalitäten:**
+  - Eingabe von Start- und Zielpunkten inkl. Auto-Vervollständigung (Debounce)  
+  - Routing-Optionen (schnell, kurz, ökologisch – auch kombinierbar)  
+  - Anzeige von Distanz, Reisezeit und CO₂-Werten  
+  - Responsives UI (Mobile & Desktop)  
+
+Um Wartbarkeit und Erweiterbarkeit zu sichern, wurde das Frontend in Manager-Klassen strukturiert:  
+- **MapManager** → verwaltet Leaflet (Basemaps, Overlays, Marker, Polylines, fitBounds)  
+- **UIManager** → steuert das Panel, Routen-Cards, CO₂-Box und Systemmeldungen  
+- **FormManager** → übernimmt Eingaben, Validierung, Debounce und Button-Handling  
+- **RouteController** → orchestriert alle Komponenten, ruft Services auf und rendert die Ergebnisse  
+
+Services für die API-Anbindung:  
+- **GeocodingService** → `/geocode/search`, `/geocode/reverse`  
+- **RoutingService** → `/fastest/tci`, `/shortest/tci`, `/eco/tci`  
+
+---
 
 ### 🔹 Backend
 - **Technologien:** Python, FastAPI + Uvicorn  
 - **Routing-Bibliotheken:** SUMO, DUAROUTER, sumolib, TraCI  
-- **Architektur:** containerbasiert mit Docker, abgesichert über Traefik (Reverse Proxy, CORS-Handling, TLS)  
-- **API-Endpunkte:**
-  - `/fastest` → schnellste Route (Zeit)  
-  - `/shortest` → kürzeste Route (Distanz)  
-  - `/eco` → CO₂-optimierte Route (Emissionen)  
+- **Architektur:** containerbasiert mit Docker, Reverse-Proxy via Traefik  
+
+Die API stellt drei Hauptendpunkte bereit:  
+- `/fastest` → berechnet die schnellste Route nach Reisezeit  
+- `/shortest` → berechnet die kürzeste Route nach Distanz  
+- `/eco` → berechnet die Route mit den geringsten CO₂-Emissionen  
 
 **Response-Kontrakt (einheitlich für alle Endpunkte):**
 ```json
