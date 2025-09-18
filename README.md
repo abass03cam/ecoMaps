@@ -2,7 +2,7 @@
 
 [![Live Demo](https://img.shields.io/badge/demo-online-brightgreen)](https://ecomaps.informatik.hs-bremerhaven.de/)
 
-**ecoMaps** ist ein Masterprojekt der Hochschule Bremerhaven (2025) im Bereich *Informatik – Vertrauenswürdige Systeme*.  
+**ecoMaps** ist ein Masterprojekt der Hochschule Bremerhaven im Bereich *Informatik – Vertrauenswürdige Systeme*.  
 Das Ziel: **nachhaltigere Mobilität** durch CO₂-optimierte Routenplanung.  
 Während viele Routenplaner nur nach Distanz oder Zeit optimieren, ermöglicht ecoMaps eine dritte Dimension: die **ökologische Effizienz**.  
 
